@@ -1,0 +1,8 @@
+{
+  "name": "notifier-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dmitry Barykin <dmit.bar716@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
