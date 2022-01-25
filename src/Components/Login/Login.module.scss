@@ -1,0 +1,60 @@
+@use "sass:map";
+@use "../../index.scss";
+
+.root {
+  width: 100%;
+  height: 100%;
+  background-color: map.get(index.$theme, "bg");
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  height: 85%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  margin-bottom: 1rem;
+
+  font-family: index.$font-family-logo;
+  font-style: italic;
+  font-size: 2.5rem;
+  letter-spacing: -0.2rem;
+
+  color: map.get(index.$theme, "fg");
+
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
+
+  &::before,
+  &::after {
+    content: "🔔";
+    font-size: 1.5rem;
+    font-style: normal;
+    padding: 0 1rem;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.fieldsMargin > input {
+  margin: 0.5em 0;
+}
+.fieldsMargin > input:first-child {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+.fieldsMargin > input:last-child {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}

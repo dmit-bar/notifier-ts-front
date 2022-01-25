@@ -16,13 +16,22 @@ module.exports = {
           // Creates `style` nodes from JS strings
           "style-loader",
           // Translates CSS into CommonJS
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+              },
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
           // Compiles Sass to CSS
           "sass-loader",
         ],
       },
       {
-        test: /\.ttf$/i,
+        test: /\.[ot]tf$/i,
         type: "asset/resource",
       },
     ],

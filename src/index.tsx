@@ -5,7 +5,6 @@ import "./index.scss";
 
 const App = () => {
   return <Login />;
-  return <div>notifier</div>;
 };
 
 ReactDOM.render(<App />, document.getElementById("app-root"));

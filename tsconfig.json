@@ -5,8 +5,7 @@
     "target": "es5",
     "jsx": "react"
   },
-  "include": [
-    "src"
-  ],
-  "compileOnSave": false
+  "include": ["src"],
+  "compileOnSave": false,
+  "plugins": [{ "name": "typescript-plugin-css-modules" }]
 }
