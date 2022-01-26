@@ -24,6 +24,11 @@
   @include index.disable-user-select;
 
   // States
+  &:hover {
+    color: map.get(index.$theme, "light");
+    background: map.get(index.$theme, "action+2");
+    border: 1px solid map.get(index.$theme, "action+1");
+  }
   &:focus {
     @include index.outline-focus;
   }

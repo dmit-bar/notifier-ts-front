@@ -50,6 +50,7 @@ $light-theme: (
   "action-1": darken($action, 10),
   "action": $action,
   "action+1": lighten($action, 10),
+  "action+2": lighten($action, 20),
   // independent from theme
   "dark-1": darken($dark, 10),
   "dark": $dark,
