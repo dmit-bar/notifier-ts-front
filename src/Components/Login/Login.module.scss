@@ -4,57 +4,62 @@
 .root {
   width: 100%;
   height: 100%;
-  background-color: map.get(index.$theme, "bg");
+  background-color: map.get(index.$theme, "secondary");
 }
 
 .content {
   display: flex;
   flex-direction: column;
   width: 70%;
-  height: 85%;
+  height: 100%;
   margin: auto;
   align-items: center;
   justify-content: center;
 }
 
 .logo {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
   font-family: index.$font-family-logo;
   font-style: italic;
   font-size: 2.5rem;
   letter-spacing: -0.2rem;
 
-  color: map.get(index.$theme, "fg");
+  color: map.get(index.$theme, "primary");
 
-  -webkit-user-select: none; /* Chrome all / Safari all */
-  -moz-user-select: none; /* Firefox all */
-  -ms-user-select: none; /* IE 10+ */
-  user-select: none; /* Likely future */
+  @include index.disable-user-select;
 
   &::before,
   &::after {
     content: "🔔";
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-style: normal;
     padding: 0 1rem;
   }
 }
 
 .form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  align-items: center;
 }
 
-.fieldsMargin > input {
-  margin: 0.5em 0;
+.fieldsMargin > input,
+.fieldsMargin > button {
+  margin: 0.5rem 0;
 }
-.fieldsMargin > input:first-child {
+.fieldsMargin > input:first-child,
+.fieldsMargin > button:first-child {
   margin-top: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.5rem;
 }
-.fieldsMargin > input:last-child {
-  margin-top: 0.5em;
+.fieldsMargin > input:last-child,
+.fieldsMargin > button:last-child {
+  margin-top: 0.5rem;
   margin-bottom: 0;
+}
+
+.buttons {
+  margin-top: 2rem;
 }

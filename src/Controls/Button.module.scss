@@ -1,0 +1,41 @@
+@use "sass:color";
+@use "sass:map";
+@use "../index.scss";
+
+.button {
+  border: 1px solid map.get(index.$theme, "action-2");
+  border-radius: 2px;
+  margin: 0;
+  padding: 0.5rem 1.5rem;
+  overflow: visible;
+  background: linear-gradient(
+    map.get(index.$theme, "action+1"),
+    map.get(index.$theme, "action")
+  );
+  line-height: normal;
+
+  @include index.type-regular;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+
+  color: map.get(index.$theme, "light");
+
+  @include index.disable-user-select;
+
+  // States
+  &:focus {
+    @include index.outline-focus;
+  }
+  &:active {
+    color: map.get(index.$theme, "light-1");
+    background: map.get(index.$theme, "action-2");
+  }
+  &:disabled {
+    font-style: italic;
+    font-weight: normal;
+    color: map.get(index.$theme, "grey+1");
+    background: map.get(index.$theme, "grey");
+    border: 1px solid map.get(index.$theme, "grey");
+  }
+}

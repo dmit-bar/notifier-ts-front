@@ -22,27 +22,61 @@ $font-family-mono: Fira Code;
   font-family: $font-family-mono;
 }
 
-$fg: #333;
-$bg: #fff;
+$primary: #333;
+$secondary: #fff;
 // $bg: #333; // dark theme
-// $fg: #fff; // dark theme
+// $fg: rgb(218, 218, 218); // dark theme
 $accent: #4a99e4;
+$action: #f5c131;
+$action: #8aa3e9;
+$action: #4f5d75;
+
+$dark: #333;
+$grey: rgb(158, 158, 158);
+$light: rgb(238, 238, 238);
 
 $light-theme: (
-  "fg-1": darken($fg, 20),
-  "fg": $fg,
-  "fg+1": lighten($fg, 20),
-  "fg+2": lighten($fg, 50),
-  "bg-1": darken($bg, 20),
-  "bg": $bg,
-  "bg+1": lighten($bg, 20),
-  "accent-1": darken($accent, 20),
+  "primary-1": darken($primary, 20),
+  "primary": $primary,
+  "primary+1": lighten($primary, 20),
+  "primary+2": lighten($primary, 50),
+  "secondary-1": darken($secondary, 20),
+  "secondary": $secondary,
+  "secondary+1": lighten($secondary, 20),
+  "accent-1": darken($accent, 10),
   "accent": $accent,
-  "accent+1": lighten($accent, 20),
+  "accent+1": lighten($accent, 10),
+  "action-2": darken($action, 20),
+  "action-1": darken($action, 10),
+  "action": $action,
+  "action+1": lighten($action, 10),
+  // independent from theme
+  "dark-1": darken($dark, 10),
+  "dark": $dark,
+  "light-1": darken($light, 20),
+  "light": $light,
+  "light+1": lighten($light, 20),
+  "dark+1": lighten($dark, 10),
+  "grey-1": darken($grey, 10),
+  "grey": $grey,
+  "grey+1": lighten($grey, 20),
 );
 
 // Theme loading
 $theme: $light-theme;
+
+@mixin outline-focus {
+  outline: 1px solid map.get($theme, "accent");
+  box-shadow: 0px 0px 2px 1px map.get($theme, "accent+1");
+  border: 1px solid map.get($theme, "accent");
+}
+
+@mixin disable-user-select {
+  -webkit-user-select: none; /* Chrome all / Safari all */
+  -moz-user-select: none; /* Firefox all */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Likely future */
+}
 
 // Global overrides
 * {
