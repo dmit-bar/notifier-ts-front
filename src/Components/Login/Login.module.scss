@@ -34,7 +34,12 @@
     content: "🔔";
     font-size: 2rem;
     font-style: normal;
-    padding: 0 1rem;
+  }
+  &::before {
+    padding-right: 1rem;
+  }
+  &::after {
+    padding-left: 1rem;
   }
 }
 
