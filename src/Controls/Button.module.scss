@@ -34,7 +34,6 @@
   &:disabled {
     transform: translateY(0);
     cursor: not-allowed;
-    box-shadow: none;
   }
 
   // Theme variants
@@ -56,9 +55,9 @@
     }
     &:disabled {
       border: 1px dashed map.get($theme, "fg-alpha-2");
-      // border-style: dashed;
       color: map.get($theme, "fg-alpha");
       background: map.get($theme, "middle");
+      box-shadow: none;
     }
   }
   &.light {
