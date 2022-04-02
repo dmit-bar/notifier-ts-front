@@ -60,11 +60,15 @@
 
 .errorLabel {
   display: inline-block;
+  white-space: pre-wrap;
 
   color: map.get(index.$theme, "error");
 
   @include fonts.type-regular;
-  font-size: 0.75rem;
+  font-size: 0.725rem;
 
-  white-space: pre-wrap;
+  text-shadow: 1px 1px map.get(index.$theme, "bg"),
+    -1px 1px map.get(index.$theme, "bg"), 1px -1px map.get(index.$theme, "bg"),
+    -1px -1px map.get(index.$theme, "bg"), 2px 0 map.get(index.$theme, "bg"),
+    -2px 0 map.get(index.$theme, "bg");
 }

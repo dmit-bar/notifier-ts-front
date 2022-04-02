@@ -38,6 +38,7 @@ const Login = () => {
                   placeholder="username"
                   style="regular"
                   size="large"
+                  autoComplete={false}
                   spellCheck={false}
                 />
               </div>
@@ -49,6 +50,7 @@ const Login = () => {
                   placeholder="password"
                   style="regular"
                   size="large"
+                  autoComplete={false}
                   spellCheck={false}
                 />
               </div>

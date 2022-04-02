@@ -1,8 +1,10 @@
 @use "sass:map";
 @use "./light.theme" as lightTheme;
+@use "./dark.theme" as darkTheme;
 
 // Theme loading
 $theme: lightTheme.$theme;
+// $theme: darkTheme.$theme;
 
 @mixin outline-focus {
   outline: 1px solid map.get($theme, "outline");

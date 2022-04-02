@@ -46,7 +46,7 @@
     cursor: not-allowed;
     box-shadow: none;
 
-    border: 1px dashed map.get(index.$theme, "fg-alpha");
+    border: 1px dashed map.get(index.$theme, "fg-alpha-2");
     // border-style: dashed;
     color: map.get(index.$theme, "fg-alpha");
     background: map.get(index.$theme, "middle");

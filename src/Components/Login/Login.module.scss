@@ -29,6 +29,8 @@
 }
 
 .logo {
+  @include index.disable-user-select;
+
   margin-bottom: 2rem;
 
   font-family: fonts.$font-family-logo;
@@ -37,7 +39,10 @@
 
   color: map.get(index.$theme, "fg");
 
-  @include index.disable-user-select;
+  text-shadow: 2px 0 map.get(index.$theme, "bg"),
+    -2px 0 map.get(index.$theme, "bg"), 0 2px map.get(index.$theme, "bg"),
+    0 2px map.get(index.$theme, "bg"), 4px 0 map.get(index.$theme, "bg"),
+    -4px 0 map.get(index.$theme, "bg");
 
   &::before,
   &::after {

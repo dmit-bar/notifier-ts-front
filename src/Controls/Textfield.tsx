@@ -13,6 +13,7 @@ interface TextfieldProps {
   spellCheck?: boolean;
   autoCorrect?: boolean;
   autoCapitalize?: boolean;
+  autoComplete?: boolean;
 }
 
 const Textfield = (props: TextfieldProps) => {
@@ -26,12 +27,14 @@ const Textfield = (props: TextfieldProps) => {
     style,
     autoCapitalize,
     autoCorrect,
+    autoComplete,
   } = { ...props };
 
   const [field, meta] = useField(name);
 
   let autoCorrectValue = autoCorrect ? "on" : "off";
   let autoCapitalizeValue = autoCapitalize ? "on" : "off";
+  let autoCompleteValue = autoComplete ? "on" : "off";
   let fieldStyle = style ? styles[style] : "";
   let sizeStyle = size == "large" ? styles.large : styles.small;
   let hasError = meta.touched && meta.error;
@@ -50,6 +53,7 @@ const Textfield = (props: TextfieldProps) => {
         spellCheck={spellCheck}
         autoCorrect={autoCorrectValue}
         autoCapitalize={autoCapitalizeValue}
+        autoComplete={autoCompleteValue}
       />
       <span className={styles.errorLabel}>{hasError ? meta.error : " "}</span>
     </div>
