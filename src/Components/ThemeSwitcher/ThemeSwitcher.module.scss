@@ -1,0 +1,62 @@
+@use "sass:map";
+@use "../../theme.light" as lightTheme;
+@use "../../theme.dark" as darkTheme;
+@use "../../index";
+
+.button {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1rem;
+  display: flex;
+  overflow: hidden;
+
+  // Theme variants
+  @mixin themify($theme) {
+    background-color: map.get($theme, "bg");
+    border: 1px solid map.get($theme, "fg");
+    border: 1px solid map.get($theme, "fg-alpha");
+    &:focus {
+      @include index.outline-focus;
+    }
+    &:hover {
+      border: 1px solid map.get($theme, "fg");
+    }
+  }
+  &.light {
+    @include themify(lightTheme.$theme);
+  }
+  &.dark {
+    @include themify(darkTheme.$theme);
+  }
+}
+
+.icons {
+  margin: auto;
+}
+
+.icon {
+  margin: auto;
+  position: absolute;
+
+  transition: transform 300ms ease-in-out;
+
+  margin: 0.55rem;
+  top: 0;
+  left: 0;
+
+  // Theme variants
+  @mixin themify($theme) {
+    color: map.get($theme, "fg");
+  }
+  &.light {
+    @include themify(lightTheme.$theme);
+  }
+  &.dark {
+    @include themify(darkTheme.$theme);
+  }
+}

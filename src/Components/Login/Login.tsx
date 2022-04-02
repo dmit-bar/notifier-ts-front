@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { ThemeContext } from "../..";
 import Button from "../../Controls/Button";
 import Textfield from "../../Controls/Textfield";
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
 import styles from "./Login.module.scss";
 
 const loginYupSchema = yup.object().shape({
@@ -16,6 +17,7 @@ const Login = () => {
 
   return (
     <div className={`${styles.root} ${styles[theme]}`}>
+      <ThemeSwitcher theme={theme} />
       <div className={styles.content}>
         <span className={`${styles.logo} ${styles[theme]}`}>notifier</span>
         <Formik
