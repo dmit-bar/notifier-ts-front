@@ -34,19 +34,25 @@ const Textfield = (props: TextfieldProps) => {
   let autoCapitalizeValue = autoCapitalize ? "on" : "off";
   let fieldStyle = style ? styles[style] : "";
   let sizeStyle = size == "large" ? styles.large : styles.small;
+  let hasError = meta.touched && meta.error;
 
   return (
-    <input
-      className={`${styles.input} ${fieldStyle} ${sizeStyle}`}
-      {...field}
-      type={type}
-      name={name}
-      id={id}
-      placeholder={placeholder}
-      spellCheck={spellCheck}
-      autoCorrect={autoCorrectValue}
-      autoCapitalize={autoCapitalizeValue}
-    />
+    <div className={styles.field}>
+      <input
+        className={`${styles.input} ${fieldStyle} ${sizeStyle} ${
+          hasError && styles.error
+        }`}
+        {...field}
+        type={type}
+        name={name}
+        id={id}
+        placeholder={placeholder}
+        spellCheck={spellCheck}
+        autoCorrect={autoCorrectValue}
+        autoCapitalize={autoCapitalizeValue}
+      />
+      <span className={styles.errorLabel}>{hasError ? meta.error : " "}</span>
+    </div>
   );
 };
 

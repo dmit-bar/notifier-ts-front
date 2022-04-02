@@ -3,6 +3,11 @@
 @use "../index";
 @use "../fonts";
 
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
 .input {
   border: 1px solid map.get(index.$theme, "fg-alpha");
   border-radius: 2px;
@@ -34,6 +39,9 @@
   &.small {
     font-size: 0.75rem;
   }
+  &.error {
+    border: 1px solid map.get(index.$theme, "error");
+  }
 
   // States
   &:hover {
@@ -48,4 +56,15 @@
     color: map.get(index.$theme, "middle");
     font-style: italic;
   }
+}
+
+.errorLabel {
+  display: inline-block;
+
+  color: map.get(index.$theme, "error");
+
+  @include fonts.type-regular;
+  font-size: 0.75rem;
+
+  white-space: pre-wrap;
 }
