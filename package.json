@@ -1,5 +1,5 @@
 {
-  "name": "notifier-ts",
+  "name": "@notifier-ts/front",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Dmitry Barykin <dmit.bar716@gmail.com>",
@@ -7,7 +7,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/dmit-bar/notifier-ts.git"
+    "url": "https://github.com/dmit-bar/notifier-ts-front.git"
   },
   "scripts": {
     "build": "webpack",
