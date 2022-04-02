@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ThemeContext } from "../..";
 import { MdOutlineLightMode, MdNightlight } from "react-icons/md";
+import * as Cookies from "js-cookie";
 import styles from "./ThemeSwitcher.module.scss";
 
 interface ThemeSwitcherProps {
@@ -29,6 +30,9 @@ const ThemeSwitcher = (props: ThemeSwitcherProps) => {
       setLightIconTransform({
         transform: `translateX(${0})`,
       });
+
+      Cookies.set("theme", "light");
+
       return;
     }
     setTheme("dark");
@@ -38,6 +42,8 @@ const ThemeSwitcher = (props: ThemeSwitcherProps) => {
     setLightIconTransform({
       transform: `translateX(${OFFSET})`,
     });
+
+    Cookies.set("theme", "dark");
   };
 
   return (
