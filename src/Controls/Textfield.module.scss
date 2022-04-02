@@ -1,9 +1,10 @@
 @use "sass:color";
 @use "sass:map";
-@use "../index.scss";
+@use "../index";
+@use "../fonts";
 
 .input {
-  border: 1px solid map.get(index.$theme, "primary+2");
+  border: 1px solid map.get(index.$theme, "fg-alpha");
   border-radius: 2px;
   margin: 0;
   padding: 0.4rem 0.6rem;
@@ -12,16 +13,16 @@
   display: inline-block;
   vertical-align: middle;
   white-space: normal;
-  color: map.get(index.$theme, "primary");
-  background: map.get(index.$theme, "secondary+1");
+  color: map.get(index.$theme, "fg");
+  background: map.get(index.$theme, "bg");
 
-  @include index.type-regular;
+  @include fonts.type-regular;
   font-size: 1rem;
   line-height: 1;
 
   // Modifiers
   &.mono {
-    @include index.type-mono;
+    @include fonts.type-mono;
   }
   &.large {
     font-size: 1.25rem;
@@ -36,7 +37,7 @@
 
   // States
   &:hover {
-    border: 1px solid map.get(index.$theme, "primary+1");
+    border: 1px solid map.get(index.$theme, "fg");
   }
 
   &:focus {
@@ -44,7 +45,7 @@
   }
 
   &::placeholder {
-    color: map.get(index.$theme, "primary+2");
+    color: map.get(index.$theme, "middle");
     font-style: italic;
   }
 }

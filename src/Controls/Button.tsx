@@ -3,15 +3,20 @@ import styles from "./Button.module.scss";
 
 interface ButtonProps {
   label: string;
+  primary?: boolean;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
-  const { label, type, disabled } = props;
+  const { label, primary, type, disabled } = props;
 
   return (
-    <button className={styles.button} type={type} disabled={disabled}>
+    <button
+      className={`${styles.button} ${primary && styles.primary}`}
+      type={type || "button"}
+      disabled={disabled}
+    >
       {label}
     </button>
   );

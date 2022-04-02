@@ -1,46 +1,54 @@
-@use "sass:color";
 @use "sass:map";
-@use "../index.scss";
+@use "../index";
+@use "../fonts";
 
 .button {
-  border: 1px solid map.get(index.$theme, "action-2");
-  border-radius: 2px;
+  @include index.disable-user-select;
+
+  border: 1px solid map.get(index.$theme, "fg");
+  border-radius: 4px;
   margin: 0;
-  padding: 0.5rem 1.5rem;
+  padding: 0.65rem 1.25rem;
   overflow: visible;
-  background: linear-gradient(
-    map.get(index.$theme, "action+1"),
-    map.get(index.$theme, "action")
-  );
+  background: map.get(index.$theme, "bg");
   line-height: normal;
 
-  @include index.type-regular;
+  @include fonts.type-regular;
   font-size: 1rem;
   font-weight: bold;
   line-height: 1;
 
-  color: map.get(index.$theme, "light");
+  color: map.get(index.$theme, "fg");
 
-  @include index.disable-user-select;
+  transition: all 200ms cubic-bezier(0.23, 1, 0.32, 1);
+
+  // Variations
+  &.primary {
+    color: map.get(index.$theme, "bg");
+    border: 1px solid map.get(index.$theme, "fg");
+    background: map.get(index.$theme, "fg");
+  }
 
   // States
   &:hover {
-    color: map.get(index.$theme, "light");
-    background: map.get(index.$theme, "action+2");
-    border: 1px solid map.get(index.$theme, "action+1");
+    //background: map.get(index.$theme, "action-alpha");
+    box-shadow: 0px 2px 5px map.get(index.$theme, "fg");
+    transform: translateY(-1px);
   }
   &:focus {
     @include index.outline-focus;
   }
   &:active {
-    color: map.get(index.$theme, "light-1");
-    background: map.get(index.$theme, "action-2");
+    transform: translateY(0);
   }
   &:disabled {
-    font-style: italic;
-    font-weight: normal;
-    color: map.get(index.$theme, "grey+1");
-    background: map.get(index.$theme, "grey");
-    border: 1px solid map.get(index.$theme, "grey");
+    transform: translateY(0);
+    cursor: not-allowed;
+    box-shadow: none;
+
+    border: 1px dashed map.get(index.$theme, "fg-alpha");
+    // border-style: dashed;
+    color: map.get(index.$theme, "fg-alpha");
+    background: map.get(index.$theme, "middle");
   }
 }

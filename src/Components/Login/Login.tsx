@@ -15,11 +15,13 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values, { setSubmitting }) => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
+            setTimeout(() => {
+              alert(JSON.stringify(values, null, 2));
+              setSubmitting(false);
+            }, 300);
           }}
         >
-          {(formik) => (
+          {(formikProps) => (
             <Form className={`${styles.form} ${styles.fieldsMargin}`}>
               <Textfield
                 name="username"
@@ -43,7 +45,8 @@ const Login = () => {
                 <Button
                   label="Sign In"
                   type="submit"
-                  disabled={formik.isSubmitting}
+                  primary
+                  disabled={formikProps.isSubmitting}
                 />
               </div>
             </Form>
