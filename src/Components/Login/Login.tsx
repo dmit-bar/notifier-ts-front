@@ -1,6 +1,7 @@
 import { Form, Formik } from "formik";
 import * as React from "react";
 import * as yup from "yup";
+import { ThemeContext } from "../..";
 import Button from "../../Controls/Button";
 import Textfield from "../../Controls/Textfield";
 import styles from "./Login.module.scss";
@@ -11,10 +12,12 @@ const loginYupSchema = yup.object().shape({
 });
 
 const Login = () => {
+  const { theme } = React.useContext(ThemeContext);
+
   return (
-    <div className={styles.root}>
+    <div className={`${styles.root} ${styles[theme]}`}>
       <div className={styles.content}>
-        <span className={styles.logo}>notifier</span>
+        <span className={`${styles.logo} ${styles[theme]}`}>notifier</span>
         <Formik
           initialValues={{
             username: "",

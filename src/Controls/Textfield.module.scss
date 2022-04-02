@@ -1,5 +1,7 @@
 @use "sass:color";
 @use "sass:map";
+@use "../theme.light" as lightTheme;
+@use "../theme.dark" as darkTheme;
 @use "../index";
 @use "../fonts";
 
@@ -9,7 +11,6 @@
 }
 
 .input {
-  border: 1px solid map.get(index.$theme, "fg-alpha");
   border-radius: 2px;
   margin: 0;
   padding: 0.4rem 0.6rem;
@@ -18,8 +19,6 @@
   display: inline-block;
   vertical-align: middle;
   white-space: normal;
-  color: map.get(index.$theme, "fg");
-  background: map.get(index.$theme, "bg");
 
   @include fonts.type-regular;
   font-size: 1rem;
@@ -39,22 +38,34 @@
   &.small {
     font-size: 0.75rem;
   }
-  &.error {
-    border: 1px solid map.get(index.$theme, "error");
-  }
 
-  // States
-  &:hover {
-    border: 1px solid map.get(index.$theme, "fg");
-  }
+  // Theme variants
+  @mixin themify($theme) {
+    border: 1px solid map.get($theme, "fg-alpha");
+    color: map.get($theme, "fg");
+    background: map.get($theme, "bg");
 
-  &:focus {
-    @include index.outline-focus;
-  }
+    &.error {
+      border: 1px solid map.get($theme, "error");
+    }
 
-  &::placeholder {
-    color: map.get(index.$theme, "middle");
-    font-style: italic;
+    &::placeholder {
+      color: map.get($theme, "middle");
+      font-style: italic;
+    }
+
+    &:focus {
+      @include index.outline-focus;
+    }
+    &:hover {
+      border: 1px solid map.get($theme, "fg");
+    }
+  }
+  &.light {
+    @include themify(lightTheme.$theme);
+  }
+  &.dark {
+    @include themify(darkTheme.$theme);
   }
 }
 
@@ -62,13 +73,20 @@
   display: inline-block;
   white-space: pre-wrap;
 
-  color: map.get(index.$theme, "error");
-
   @include fonts.type-regular;
   font-size: 0.725rem;
 
-  text-shadow: 1px 1px map.get(index.$theme, "bg"),
-    -1px 1px map.get(index.$theme, "bg"), 1px -1px map.get(index.$theme, "bg"),
-    -1px -1px map.get(index.$theme, "bg"), 2px 0 map.get(index.$theme, "bg"),
-    -2px 0 map.get(index.$theme, "bg");
+  // Theme variants
+  @mixin themify($theme) {
+    color: map.get($theme, "error");
+    text-shadow: 1px 1px map.get($theme, "bg"), -1px 1px map.get($theme, "bg"),
+      1px -1px map.get($theme, "bg"), -1px -1px map.get($theme, "bg"),
+      2px 0 map.get($theme, "bg"), -2px 0 map.get($theme, "bg");
+  }
+  &.light {
+    @include themify(lightTheme.$theme);
+  }
+  &.dark {
+    @include themify(darkTheme.$theme);
+  }
 }

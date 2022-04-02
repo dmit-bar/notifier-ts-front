@@ -1,16 +1,17 @@
 @use "sass:map";
+@use "../theme.light" as lightTheme;
+@use "../theme.dark" as darkTheme;
 @use "../index";
 @use "../fonts";
 
 .button {
   @include index.disable-user-select;
 
-  border: 1px solid map.get(index.$theme, "fg");
   border-radius: 4px;
   margin: 0;
   padding: 0.65rem 1.25rem;
   overflow: visible;
-  background: map.get(index.$theme, "bg");
+
   line-height: normal;
 
   @include fonts.type-regular;
@@ -18,21 +19,10 @@
   font-weight: bold;
   line-height: 1;
 
-  color: map.get(index.$theme, "fg");
-
   transition: all 200ms cubic-bezier(0.23, 1, 0.32, 1);
-
-  // Variations
-  &.primary {
-    color: map.get(index.$theme, "bg");
-    border: 1px solid map.get(index.$theme, "fg");
-    background: map.get(index.$theme, "fg");
-  }
 
   // States
   &:hover {
-    //background: map.get(index.$theme, "action-alpha");
-    box-shadow: 0px 2px 5px map.get(index.$theme, "fg");
     transform: translateY(-1px);
   }
   &:focus {
@@ -45,10 +35,36 @@
     transform: translateY(0);
     cursor: not-allowed;
     box-shadow: none;
+  }
 
-    border: 1px dashed map.get(index.$theme, "fg-alpha-2");
-    // border-style: dashed;
-    color: map.get(index.$theme, "fg-alpha");
-    background: map.get(index.$theme, "middle");
+  // Theme variants
+  @mixin themify($theme) {
+    border: 1px solid map.get($theme, "fg");
+    background: map.get($theme, "bg");
+    color: map.get($theme, "fg");
+
+    // Variations
+    &.primary {
+      color: map.get($theme, "bg");
+      border: 1px solid map.get($theme, "fg");
+      background: map.get($theme, "fg");
+    }
+
+    // States
+    &:hover {
+      box-shadow: 0px 2px 5px map.get($theme, "fg");
+    }
+    &:disabled {
+      border: 1px dashed map.get($theme, "fg-alpha-2");
+      // border-style: dashed;
+      color: map.get($theme, "fg-alpha");
+      background: map.get($theme, "middle");
+    }
+  }
+  &.light {
+    @include themify(lightTheme.$theme);
+  }
+  &.dark {
+    @include themify(darkTheme.$theme);
   }
 }

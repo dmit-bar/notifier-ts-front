@@ -1,5 +1,6 @@
 import { useField } from "formik";
 import * as React from "react";
+import { ThemeContext } from "..";
 import styles from "./Textfield.module.scss";
 
 interface TextfieldProps {
@@ -32,6 +33,8 @@ const Textfield = (props: TextfieldProps) => {
 
   const [field, meta] = useField(name);
 
+  const { theme } = React.useContext(ThemeContext);
+
   let autoCorrectValue = autoCorrect ? "on" : "off";
   let autoCapitalizeValue = autoCapitalize ? "on" : "off";
   let autoCompleteValue = autoComplete ? "on" : "off";
@@ -44,7 +47,7 @@ const Textfield = (props: TextfieldProps) => {
       <input
         className={`${styles.input} ${fieldStyle} ${sizeStyle} ${
           hasError && styles.error
-        }`}
+        } ${styles[theme]}`}
         {...field}
         type={type}
         name={name}
@@ -55,7 +58,9 @@ const Textfield = (props: TextfieldProps) => {
         autoCapitalize={autoCapitalizeValue}
         autoComplete={autoCompleteValue}
       />
-      <span className={styles.errorLabel}>{hasError ? meta.error : " "}</span>
+      <span className={`${styles.errorLabel} ${styles[theme]}`}>
+        {hasError ? meta.error : " "}
+      </span>
     </div>
   );
 };

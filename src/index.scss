@@ -1,14 +1,8 @@
-@use "sass:map";
-@use "./light.theme" as lightTheme;
-@use "./dark.theme" as darkTheme;
-
-// Theme loading
-$theme: lightTheme.$theme;
-// $theme: darkTheme.$theme;
+$cornflower-blue: #54b2ffff;
 
 @mixin outline-focus {
-  outline: 1px solid map.get($theme, "outline");
-  box-shadow: 0px 0px 2px 1px map.get($theme, "outline");
+  outline: 1px solid $cornflower-blue;
+  box-shadow: 0px 0px 2px 1px $cornflower-blue;
 }
 
 @mixin disable-user-select {
