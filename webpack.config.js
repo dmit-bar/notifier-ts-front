@@ -1,7 +1,16 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "development",
+  plugins: [
+    new MiniCssExtractPlugin(),
+    new HtmlWebpackPlugin({
+      title: "notifier",
+      template: "./public/index.html",
+    }),
+  ],
   entry: "./src/index.tsx",
   module: {
     rules: [
@@ -11,10 +20,10 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.[s]css$/i,
         use: [
           // Creates `style` nodes from JS strings
-          "style-loader",
+          MiniCssExtractPlugin.loader,
           // Translates CSS into CommonJS
           {
             loader: "css-loader",
@@ -44,7 +53,7 @@ module.exports = {
   },
   output: {
     filename: "app/index.js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dist"),
   },
   devtool: "source-map",
 };
