@@ -1,3 +1,4 @@
+import { useField } from "formik";
 import * as React from "react";
 import styles from "./Textfield.module.scss";
 
@@ -5,6 +6,7 @@ interface TextfieldProps {
   id: string;
   name: string;
   type: string;
+  label?: string;
   size?: string;
   style?: string;
   placeholder?: string;
@@ -26,6 +28,8 @@ const Textfield = (props: TextfieldProps) => {
     autoCorrect,
   } = { ...props };
 
+  const [field, meta] = useField(name);
+
   let autoCorrectValue = autoCorrect ? "on" : "off";
   let autoCapitalizeValue = autoCapitalize ? "on" : "off";
   let fieldStyle = style ? styles[style] : "";
@@ -34,6 +38,7 @@ const Textfield = (props: TextfieldProps) => {
   return (
     <input
       className={`${styles.input} ${fieldStyle} ${sizeStyle}`}
+      {...field}
       type={type}
       name={name}
       id={id}

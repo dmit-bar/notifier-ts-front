@@ -3,14 +3,15 @@ import styles from "./Button.module.scss";
 
 interface ButtonProps {
   label: string;
+  type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
-  const { label, disabled } = props;
+  const { label, type, disabled } = props;
 
   return (
-    <button disabled={disabled} className={styles.button}>
+    <button className={styles.button} type={type} disabled={disabled}>
       {label}
     </button>
   );
