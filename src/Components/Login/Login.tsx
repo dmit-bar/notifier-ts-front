@@ -31,7 +31,7 @@ const Login = () => {
           />
         </div>
         <div className={styles.buttons}>
-          <Button label="Log In" />
+          <Button label="Sign In" />
         </div>
       </div>
     </div>
