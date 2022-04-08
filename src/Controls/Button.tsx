@@ -7,10 +7,11 @@ interface ButtonProps {
   primary?: boolean;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
+  isSubmitting?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
-  const { label, primary, type, disabled } = props;
+  const { label, primary, type, disabled, isSubmitting } = props;
 
   const { theme } = React.useContext(ThemeContext);
 
@@ -18,9 +19,9 @@ const Button = (props: ButtonProps) => {
     <button
       className={`${styles.button} ${primary && styles.primary} ${
         styles[theme]
-      }`}
+      } ${isSubmitting && styles.submitting}`}
       type={type || "button"}
-      disabled={disabled}
+      disabled={disabled || isSubmitting}
     >
       {label}
     </button>

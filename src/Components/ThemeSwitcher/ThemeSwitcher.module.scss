@@ -8,10 +8,12 @@
   height: 2.5rem;
   border-radius: 100%;
 
+  transition: all 200ms;
+
   position: absolute;
   top: 0;
   right: 0;
-  margin: 1rem;
+  margin: 0.5rem;
   display: flex;
   overflow: hidden;
 
@@ -43,7 +45,7 @@
   margin: auto;
   position: absolute;
 
-  transition: transform 300ms ease-in-out;
+  transition: transform 300ms ease-out;
 
   margin: 0.55rem;
   top: 0;

@@ -28,9 +28,9 @@ const Login = () => {
           validationSchema={loginYupSchema}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              console.log(values);
               setSubmitting(false);
-            }, 300);
+            }, 5000);
           }}
         >
           {(formikProps) => (
@@ -45,6 +45,7 @@ const Login = () => {
                   size="large"
                   autoComplete={false}
                   spellCheck={false}
+                  disabled={formikProps.isSubmitting}
                 />
               </div>
               <div className={styles.field}>
@@ -57,6 +58,7 @@ const Login = () => {
                   size="large"
                   autoComplete={false}
                   spellCheck={false}
+                  disabled={formikProps.isSubmitting}
                 />
               </div>
               <div className={styles.buttons}>
@@ -64,7 +66,7 @@ const Login = () => {
                   label="Sign In"
                   type="submit"
                   primary
-                  disabled={formikProps.isSubmitting}
+                  isSubmitting={formikProps.isSubmitting}
                 />
               </div>
             </Form>

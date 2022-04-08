@@ -7,6 +7,8 @@ interface TextfieldProps {
   id: string;
   name: string;
   type: string;
+  disabled?: boolean;
+  isSubmitting?: boolean;
   label?: string;
   size?: string;
   style?: string;
@@ -22,6 +24,8 @@ const Textfield = (props: TextfieldProps) => {
     name,
     id,
     type,
+    disabled,
+    isSubmitting,
     placeholder,
     spellCheck,
     size,
@@ -52,6 +56,7 @@ const Textfield = (props: TextfieldProps) => {
         type={type}
         name={name}
         id={id}
+        disabled={disabled || isSubmitting}
         placeholder={placeholder}
         spellCheck={spellCheck}
         autoCorrect={autoCorrectValue}
