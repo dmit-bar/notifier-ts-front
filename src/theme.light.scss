@@ -2,9 +2,6 @@
 
 /* SCSS HEX */
 $rich-black-fogra-39: #0a100dff;
-$quick-silver: #9ca0a0;
-$battleship-grey: #858585;
-$x-grey: #cac5c5;
 $cornflower-blue: #54b2ffff;
 $orange-yellow: #f3b61fff;
 $rusty-red: #de3c4bff;
@@ -15,8 +12,7 @@ $theme: (
   "outline": $cornflower-blue,
   "error": $rusty-red,
   "fg": $rich-black-fogra-39,
-  "fg-alpha": color.scale($rich-black-fogra-39, $alpha: -60%),
-  "fg-alpha-2": color.scale($rich-black-fogra-39, $alpha: -90%),
-  "middle": $x-grey,
+  "middle": #b2aaaa,
+  "middle-2": #e8e6e6,
   "bg": $white,
 );

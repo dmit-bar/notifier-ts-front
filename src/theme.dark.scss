@@ -3,7 +3,7 @@
 /* SCSS HEX */
 $rich-black-fogra-39: #0a100dff;
 $quick-silver: #9ca0a0;
-$battleship-grey: #858585;
+$battleship-grey: #777777;
 $x-grey: #bdb9b9;
 $cornflower-blue: #54b2ffff;
 $orange-yellow: #f3b61fff;
@@ -15,8 +15,7 @@ $theme: (
   "outline": $cornflower-blue,
   "error": $rusty-red,
   "fg": $white,
-  "fg-alpha": color.scale($white, $alpha: -60%),
-  "fg-alpha-2": color.scale($white, $alpha: -90%),
   "middle": $battleship-grey,
+  "middle-2": #363636,
   "bg": $rich-black-fogra-39,
 );

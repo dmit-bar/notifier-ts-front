@@ -43,7 +43,7 @@
 
   // Theme variants
   @mixin themify($theme) {
-    border: 1px solid map.get($theme, "fg-alpha");
+    border: 1px solid map.get($theme, "middle");
     color: map.get($theme, "fg");
     background: map.get($theme, "bg");
 
@@ -65,7 +65,8 @@
     &:disabled {
       cursor: not-allowed;
       color: map.get($theme, "fg");
-      background-color: map.get($theme, "fg-alpha-2");
+      border: 1px solid map.get($theme, "middle");
+      background-color: map.get($theme, "middle-2");
     }
   }
   &.light {

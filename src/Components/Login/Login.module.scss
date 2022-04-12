@@ -14,7 +14,7 @@
   @mixin themify($theme) {
     background-color: map.get($theme, "bg");
     background-image: radial-gradient(
-      map.get($theme, "fg-alpha-2") 1px,
+      map.get($theme, "middle-2") 1px,
       map.get($theme, "bg") 1px
     );
   }
