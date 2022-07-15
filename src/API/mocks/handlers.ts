@@ -1,11 +1,14 @@
 import { rest } from "msw";
+import { v4 as uuidv4 } from "uuid";
 
 export const handlers = [
-  // CSRF Token
-  rest.get("/getCSRF", (req, res, ctx) => {
-    sessionStorage.setItem("csrf-token", "legit-csrf-token");
-
-    return res(ctx.status(200));
+  // Setting up session
+  rest.post("api/setup-session", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        sessionID: uuidv4(),
+      })
+    );
   }),
-  rest.post("/auth", null),
 ];

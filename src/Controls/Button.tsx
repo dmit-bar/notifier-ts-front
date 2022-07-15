@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ThemeContext } from "..";
+import { ThemeContext } from "../Components/Theme/Theme";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {

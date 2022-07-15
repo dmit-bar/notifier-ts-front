@@ -1,31 +1,45 @@
 import axios from "axios";
 import * as Cookies from "js-cookie";
-import { Auth, AUTH_SESSION_ID } from "../Model/Auth/Auth";
-import { AUTH_URL as URL_AUTH } from "./settings";
+import { Auth } from "../Components/Auth/Auth";
+import { APP_API_URL as URL_AUTH } from "./settings";
 
-export async function getAuthInfo(): Promise<Auth> {
-  let auth: Auth;
-  // TODO get auth session value from cookies
-  // if not present request new guest session
-  // return Session ID and CSRF token
-  const session = Cookies.get(AUTH_SESSION_ID);
-  if (session) {
-    // TODO get CSRF token with auth-id in a header
-    auth = { session, token: "" };
-  }
+export const SESSION_ID_COOKIE = "notifier-session-id";
+const SETUP_SESSION = "/setup-session";
 
-  // TODO
-  // try {
-  //   const res = await axios({ url: URL_AUTH, method: "get" });
-  //   Promise.resolve(res);
-  // } catch (e) {}
+/**
+ * setupAuth() is used to create new user session on the server
+ * or reuse existing session using session ID taken from cookies.
+ * @returns Authentication information
+ */
+export function setupAuth(): Promise<Auth> {
+  return new Promise<Auth>((resolve, reject) => {
+    // check if session cookie is present
+    const sessionID = Cookies.get(SESSION_ID_COOKIE);
+    if (sessionID) {
+      // TODO session ID expiration logic
 
-  Cookies.set(AUTH_SESSION_ID, auth.session);
+      resolve({ sessionID });
+      return;
+    }
 
-  return new Promise((resolve, reject) => {
-    resolve({
-      session: "randomly-generated-session-id",
-      token: "randomly-generated-token-id",
-    });
+    // if session cookie is not present request new guest session
+    axios({ url: URL_AUTH + SETUP_SESSION, method: "post" })
+      .then((rs) => {
+        const payload: Auth = rs.data as Auth;
+
+        if (payload.sessionID) {
+          Cookies.set(SESSION_ID_COOKIE, payload.sessionID);
+          resolve(payload);
+        } else {
+          reject(
+            new Error(
+              `Failed to get session ID from server. Received empty session ID`
+            )
+          );
+        }
+      })
+      .catch((e) => {
+        reject(new Error(`Failed to get session ID from server. ${e}`));
+      });
   });
 }

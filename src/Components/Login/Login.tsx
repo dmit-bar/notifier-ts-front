@@ -1,10 +1,10 @@
 import { Form, Formik } from "formik";
 import * as React from "react";
 import * as yup from "yup";
-import { ThemeContext } from "../..";
+import { ThemeContext } from "../Theme/Theme";
 import Button from "../../Controls/Button";
 import Textfield from "../../Controls/Textfield";
-import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import ThemeSwitcher from "../Theme/ThemeSwitcher";
 import styles from "./Login.module.scss";
 
 const loginYupSchema = yup.object().shape({

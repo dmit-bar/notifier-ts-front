@@ -1,76 +1,56 @@
-import * as Cookies from "js-cookie";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { getAuthInfo } from "./API/session";
+import { LOADING_STATE } from "./API/const";
+import { setupAuth } from "./API/session";
+import { AuthContext, AuthProvider } from "./Components/Auth/Auth";
 import Login from "./Components/Login/Login";
+import { ThemeProvider } from "./Components/Theme/Theme";
 import "./index.scss";
-import { Auth, AUTH_SESSION_ID } from "./Model/Auth/Auth";
 
+// Setting up service worker for mocking API
 if (process.env.NODE_ENV === "development") {
   const { worker } = require("./API/mocks/browser");
   worker.start();
 }
 
-export const AuthContext = React.createContext<{
-  auth: Auth;
-  setAuth: React.Dispatch<React.SetStateAction<Auth>>;
-}>({
-  auth: {
-    session: "",
-    token: "",
-  },
-  setAuth: null,
-});
-const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = React.useState<Auth>({
-    session: "",
-    token: "",
-  });
-
-  return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
-      {children}
-    </AuthContext.Provider>
+const App = () => {
+  const { setAuth } = React.useContext(AuthContext);
+  const [loadingState, setLoadingState] = React.useState<LOADING_STATE>(
+    LOADING_STATE.PENDING
   );
-};
 
-export const ThemeContext = React.createContext({
-  theme: "light",
-  setTheme: null,
-});
-const ThemeProvider = ({ children }) => {
-  const currentTheme = Cookies.get("theme");
-  const [theme, setTheme] = React.useState<string>(currentTheme || "light");
+  React.useEffect(() => {
+    setupAuth()
+      .then((res) => {
+        setAuth({ ...res });
+        setLoadingState(LOADING_STATE.FULFILLED);
+      })
+      .catch((e: Error) => {
+        console.error(e.stack);
+        setLoadingState(LOADING_STATE.REJECTED);
+      });
+  }, []);
 
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  let renderComponent: JSX.Element = <span>loading...</span>;
+  switch (loadingState) {
+    case LOADING_STATE.FULFILLED:
+      renderComponent = <Login />;
+      break;
+    case LOADING_STATE.REJECTED:
+      renderComponent = <span>{"🥹 Sowwy, somewing is nawt wowking 🥹"}</span>;
+      break;
+  }
+
+  return renderComponent;
 };
 
 const Root = () => {
   return (
     <AuthProvider>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </AuthProvider>
-  );
-};
-
-const App = () => {
-  const { setAuth } = React.useContext(AuthContext);
-
-  React.useEffect(() => {
-    // TODO Logic when user is already authenticated (auth-session-id is present in cookies and not expired)
-    getAuthInfo().then((res) => {
-      setAuth({ ...res });
-    });
-  }, []);
-
-  return (
-    <ThemeProvider>
-      <Login />
-    </ThemeProvider>
   );
 };
 

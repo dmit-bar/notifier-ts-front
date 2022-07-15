@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ThemeContext } from "../..";
+import { ThemeContext } from "./Theme";
 import { MdOutlineLightMode, MdNightlight } from "react-icons/md";
 import * as Cookies from "js-cookie";
 import styles from "./ThemeSwitcher.module.scss";
