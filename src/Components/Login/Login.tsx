@@ -7,7 +7,7 @@ import Textfield from "../../Controls/Textfield";
 import ThemeSwitcher from "../../Context/Theme/ThemeSwitcher";
 import styles from "./Login.module.scss";
 import { UserCredentials } from "../../API/Model/Session";
-import { IS_AUTH_COOKIE, login, SESSION_ID_COOKIE } from "../../API/session";
+import apiApp, { IS_AUTH_COOKIE, SESSION_ID_COOKIE } from "../../API/apiApp";
 import { SessionContext } from "../../Context/Session/Session";
 import Cookies = require("js-cookie");
 
@@ -21,7 +21,8 @@ const Login = () => {
   const { session, setSession } = React.useContext(SessionContext);
 
   const handleSubmit = (values: UserCredentials, { setSubmitting }) => {
-    login(session, values)
+    apiApp
+      .login(session, values)
       .then((res) => {
         setSession(res);
         Cookies.set(SESSION_ID_COOKIE, res.id);

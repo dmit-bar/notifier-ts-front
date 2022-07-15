@@ -20,7 +20,7 @@ const SERVICE = {
  * or reuse existing session using session ID taken from cookies.
  * @returns {Session} Authentication information
  */
-export function setupAuth(): Promise<Session> {
+function setupAuth(): Promise<Session> {
   return new Promise<Session>((resolve, reject) => {
     // check if session cookie is present
     const sessionID = Cookies.get(SESSION_ID_COOKIE);
@@ -59,7 +59,7 @@ export function setupAuth(): Promise<Session> {
  * Get CSRF token value
  * @returns {string} CSRF token
  */
-export function getCRSFToken(): string {
+function getCRSFToken(): string {
   const csrfInput = document.getElementById("csrf-token") as HTMLInputElement;
   return csrfInput.value;
 }
@@ -67,7 +67,7 @@ export function getCRSFToken(): string {
 /**
  * Set CSRF token value
  */
-export function setCRSFToken(token: string) {
+function setCRSFToken(token: string) {
   const csrfInput = document.getElementById("csrf-token") as HTMLInputElement;
   csrfInput.value = token;
 }
@@ -76,7 +76,7 @@ export function setCRSFToken(token: string) {
  * Request CSRF token from server to use in API calls
  * @returns {string} CSRF token
  */
-export function requestCRSFToken(): Promise<string> {
+function requestCRSFToken(): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     axios({ url: URL_AUTH + SERVICE.CSRF_TOKEN, method: "get" })
       .then((res) => {
@@ -98,7 +98,7 @@ export function requestCRSFToken(): Promise<string> {
  * Authenticates and authorizes user using credentials
  * @returns {Session} new session ID for authenticated user
  */
-export function login(auth: Session, creds: UserCredentials): Promise<Session> {
+function login(auth: Session, creds: UserCredentials): Promise<Session> {
   return new Promise<Session>((resolve, reject) => {
     axios({
       ...defaultAppAPIAxiosConfig(auth, SERVICE.LOGIN, METHOD.POST),
@@ -113,3 +113,11 @@ export function login(auth: Session, creds: UserCredentials): Promise<Session> {
       });
   });
 }
+
+export default {
+  setupAuth,
+  getCRSFToken,
+  setCRSFToken,
+  requestCRSFToken,
+  login,
+};

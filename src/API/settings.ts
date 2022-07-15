@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 import { Session } from "./Model/Session";
-import { getCRSFToken } from "./session";
+import apiApp from "./apiApp";
 
 export const METHOD = {
   GET: "get",
@@ -20,7 +20,7 @@ export function defaultAppAPIAxiosConfig(
     url: service,
     method,
     headers: {
-      "csrf-token": getCRSFToken(),
+      "csrf-token": apiApp.getCRSFToken(),
       "session-id": session.id,
     },
   };
