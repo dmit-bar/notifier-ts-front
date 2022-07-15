@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { LOADING_STATE } from "./API/const";
-import { setupAuth } from "./API/session";
+import { requestCRSFToken, setCRSFToken, setupAuth } from "./API/session";
 import { AuthContext, AuthProvider } from "./Components/Auth/Auth";
 import Login from "./Components/Login/Login";
 import { ThemeProvider } from "./Components/Theme/Theme";
@@ -20,8 +20,13 @@ const App = () => {
   );
 
   React.useEffect(() => {
-    setupAuth()
+    requestCRSFToken()
+      .then((token) => {
+        setCRSFToken(token);
+        return setupAuth();
+      })
       .then((res) => {
+        // Updating context with session info
         setAuth({ ...res });
         setLoadingState(LOADING_STATE.FULFILLED);
       })
