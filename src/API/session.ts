@@ -7,8 +7,8 @@ import {
   METHOD,
 } from "./settings";
 
-export const SESSION_ID_COOKIE = "notifier-session-id";
-export const IS_AUTH_COOKIE = "notifier-is-authenticated";
+export const SESSION_ID_COOKIE = "session-id";
+export const IS_AUTH_COOKIE = "is-authenticated";
 const SERVICE = {
   SETUP_SESSION: "/setup-session",
   CSRF_TOKEN: "/csrf-token",
