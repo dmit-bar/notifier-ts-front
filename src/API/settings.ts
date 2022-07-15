@@ -1,6 +1,11 @@
 import { AxiosRequestConfig } from "axios";
-import { Auth } from "../Components/Auth/Auth";
+import { Auth } from "../API/Model/Auth";
 import { getCRSFToken } from "./session";
+
+export const METHOD = {
+  GET: "get",
+  POST: "post",
+};
 
 // TODO get value from enviroment
 export const APP_API_URL = "http://localhost:1337/api";

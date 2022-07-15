@@ -15,4 +15,14 @@ export const handlers = [
       })
     );
   }),
+  // Login
+  rest.post("api/login", (req, res, ctx) => {
+    return res(
+      ctx.delay(3000),
+      ctx.status(200),
+      ctx.json({
+        sessionID: "new-session-id-for-user",
+      })
+    );
+  }),
 ];

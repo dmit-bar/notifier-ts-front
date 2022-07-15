@@ -6,14 +6,34 @@ import Button from "../../Controls/Button";
 import Textfield from "../../Controls/Textfield";
 import ThemeSwitcher from "../Theme/ThemeSwitcher";
 import styles from "./Login.module.scss";
+import { UserCredentials } from "../../API/Model/Auth";
+import { IS_AUTH_COOKIE, login, SESSION_ID_COOKIE } from "../../API/session";
+import { AuthContext } from "../Auth/Auth";
+import Cookies = require("js-cookie");
 
 const loginYupSchema = yup.object().shape({
-  username: yup.string().required("Username is a required field"),
-  password: yup.string().required("Password is a required field"),
+  login: yup.string().required("login is a required field"),
+  pass: yup.string().required("pass is a required field"),
 });
 
 const Login = () => {
   const { theme } = React.useContext(ThemeContext);
+  const { auth, setAuth } = React.useContext(AuthContext);
+
+  const handleSubmit = (values: UserCredentials, { setSubmitting }) => {
+    login(auth, values)
+      .then((res) => {
+        setAuth(res);
+        Cookies.set(SESSION_ID_COOKIE, res.sessionID);
+        Cookies.set(IS_AUTH_COOKIE, "true");
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+  };
 
   return (
     <div className={`${styles.root} ${styles[theme]}`}>
@@ -22,25 +42,20 @@ const Login = () => {
         <span className={`${styles.logo} ${styles[theme]}`}>notifier</span>
         <Formik
           initialValues={{
-            username: "",
-            password: "",
+            login: "",
+            pass: "",
           }}
           validationSchema={loginYupSchema}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              console.log(values);
-              setSubmitting(false);
-            }, 5000);
-          }}
+          onSubmit={handleSubmit}
         >
           {(formikProps) => (
             <Form className={`${styles.form} ${styles.fieldsMargin}`}>
               <div className={styles.field}>
                 <Textfield
-                  name="username"
-                  id="username"
+                  name="login"
+                  id="login"
                   type="text"
-                  placeholder="username"
+                  placeholder="login"
                   style="regular"
                   size="large"
                   autoComplete={false}
@@ -50,10 +65,10 @@ const Login = () => {
               </div>
               <div className={styles.field}>
                 <Textfield
-                  name="password"
-                  id="password"
+                  name="pass"
+                  id="pass"
                   type="password"
-                  placeholder="password"
+                  placeholder="pass"
                   style="regular"
                   size="large"
                   autoComplete={false}

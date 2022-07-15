@@ -1,9 +1,5 @@
 import React = require("react");
-
-export interface Auth {
-  sessionID: string;
-  isAuthenticated?: boolean;
-}
+import { Auth } from "../../API/Model/Auth";
 
 export const AuthContext = React.createContext<{
   auth: Auth;
