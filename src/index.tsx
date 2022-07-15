@@ -2,9 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { LOADING_STATE } from "./API/const";
 import { requestCRSFToken, setCRSFToken, setupAuth } from "./API/session";
-import { AuthContext, AuthProvider } from "./Components/Auth/Auth";
+import { SessionContext, SessionProvider } from "./Context/Session/Session";
 import Login from "./Components/Login/Login";
-import { ThemeProvider } from "./Components/Theme/Theme";
+import { ThemeProvider } from "./Context/Theme/Theme";
 import "./index.scss";
 
 // Setting up service worker for mocking API
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const App = () => {
-  const { setAuth } = React.useContext(AuthContext);
+  const { setSession } = React.useContext(SessionContext);
   const [loadingState, setLoadingState] = React.useState<LOADING_STATE>(
     LOADING_STATE.PENDING
   );
@@ -27,7 +27,7 @@ const App = () => {
       })
       .then((res) => {
         // Updating context with session info
-        setAuth({ ...res });
+        setSession({ ...res });
         setLoadingState(LOADING_STATE.FULFILLED);
       })
       .catch((e: Error) => {
@@ -51,11 +51,11 @@ const App = () => {
 
 const Root = () => {
   return (
-    <AuthProvider>
+    <SessionProvider>
       <ThemeProvider>
         <App />
       </ThemeProvider>
-    </AuthProvider>
+    </SessionProvider>
   );
 };
 

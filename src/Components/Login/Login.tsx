@@ -1,14 +1,14 @@
 import { Form, Formik } from "formik";
 import * as React from "react";
 import * as yup from "yup";
-import { ThemeContext } from "../Theme/Theme";
+import { ThemeContext } from "../../Context/Theme/Theme";
 import Button from "../../Controls/Button";
 import Textfield from "../../Controls/Textfield";
-import ThemeSwitcher from "../Theme/ThemeSwitcher";
+import ThemeSwitcher from "../../Context/Theme/ThemeSwitcher";
 import styles from "./Login.module.scss";
-import { UserCredentials } from "../../API/Model/Auth";
+import { UserCredentials } from "../../API/Model/Session";
 import { IS_AUTH_COOKIE, login, SESSION_ID_COOKIE } from "../../API/session";
-import { AuthContext } from "../Auth/Auth";
+import { SessionContext } from "../../Context/Session/Session";
 import Cookies = require("js-cookie");
 
 const loginYupSchema = yup.object().shape({
@@ -18,13 +18,13 @@ const loginYupSchema = yup.object().shape({
 
 const Login = () => {
   const { theme } = React.useContext(ThemeContext);
-  const { auth, setAuth } = React.useContext(AuthContext);
+  const { session, setSession } = React.useContext(SessionContext);
 
   const handleSubmit = (values: UserCredentials, { setSubmitting }) => {
-    login(auth, values)
+    login(session, values)
       .then((res) => {
-        setAuth(res);
-        Cookies.set(SESSION_ID_COOKIE, res.sessionID);
+        setSession(res);
+        Cookies.set(SESSION_ID_COOKIE, res.id);
         Cookies.set(IS_AUTH_COOKIE, "true");
       })
       .catch((e) => {
