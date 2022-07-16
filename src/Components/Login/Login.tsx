@@ -12,8 +12,8 @@ import { SessionContext } from "../../Context/Session/Session";
 import Cookies = require("js-cookie");
 
 const loginYupSchema = yup.object().shape({
-  login: yup.string().required("login is a required field"),
-  pass: yup.string().required("pass is a required field"),
+  login: yup.string().required("Login is a required field"),
+  pass: yup.string().required("Password is a required field"),
 });
 
 const Login = () => {
